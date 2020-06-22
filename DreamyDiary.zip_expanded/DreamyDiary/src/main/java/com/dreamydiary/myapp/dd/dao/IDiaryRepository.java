@@ -8,4 +8,6 @@ public interface IDiaryRepository {
 	public MemberVO getMemberInfo(String id);
 	public void insertMemberInfo(MemberVO member);
 	public List<MemberVO> getMemberList();
+	void updateMemberInfo(MemberVO member);
+	void deleteMemberInfo(String id, String password);
 }

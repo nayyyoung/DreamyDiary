@@ -19,14 +19,6 @@
 
 <title>Log In!</title>
 
-<script type="text/javascript">
-     window.onload = function() {
-          document.getElementById("register").onclick = function() {
-        	  location.href = "/dd/signup";
-     	  }
-     }
-
-</script>
 </head>
 <body>
 
@@ -46,17 +38,18 @@
 				<form accept-charset="utf-8"
 					name="member_info" method="post">
 					<div class="form-group">
-						<label>User Id</label> <input type="text" name="userId" class="form-control"
+						<label>ID</label> <input type="text" name="userId" class="form-control"
 							placeholder="User Name" required>
 					</div>
 					<div class="form-group">
-						<label>Password</label> <input type="password" name="passWord"
+						<label>비밀번호</label> <input type="password" name="passWord"
 							class="form-control" placeholder="Password"	required>
 					</div>
-					<button type="submit" class="btn btn-black">Login</button>
+					<button type="submit" class="btn btn-black">로그인</button>
 				</form>
 				<form accept-charset="utf-8" method="get">
-					<button type="submit" class="btn btn-secondary" formaction="/dd/signup">Register</button>
+					<button type="submit" class="btn btn-secondary" formaction="/dd/signup">회원가입</button>
+					<button type="submit" class="btn btn-secondary" formaction="/dd/resign">회원탈퇴</button>
 				</form>
 			</div>
 		</div>

@@ -30,9 +30,9 @@ public class DiaryController {
 
 		
 //		MemberVO member = service.getMemberInfo("abc");
-//		System.out.println(member);
+		System.out.println(memberVO);
 		List<MemberVO> memberList = service.getMemberList();
-		System.out.println(memberList);
+		//System.out.println(memberList);
 		for (MemberVO member : memberList) {
 			if(member.getUserId().equals(memberVO.getUserId())) {
 				System.out.println("id confirm");
@@ -42,7 +42,7 @@ public class DiaryController {
 				}
 			}
 		}
-		return "home";
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/dd/signup")
@@ -52,8 +52,20 @@ public class DiaryController {
 
 	@RequestMapping(value = "/dd/signup", method = RequestMethod.POST)
 	public String signupToCalendar(MemberVO memberVO, Model model) {
+		System.out.println("insert:" + memberVO);
 		service.insertMemberInfo(memberVO);
-		return "home";
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "/dd/resign")
+	public String resign(Model model) {
+		return "/dd/resign";
+	}
+	
+	@RequestMapping(value = "/dd/resign", method = RequestMethod.POST)
+	public String resignToCalendar(MemberVO memberVO, Model model) {
+		service.deleteMemberInfo(memberVO.getUserId(), memberVO.getPassWord());
+		return "redirect:/";
 	}
 
 }

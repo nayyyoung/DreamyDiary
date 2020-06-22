@@ -111,16 +111,6 @@
 			calendar.render();
 		});
 	</script>
-	<style type="text/css">
-	.navbar ul {
-	  list-style-type: none;
-	  padding: 0;
-	  display: flex;
-	  flex-direction: row;
-	  justify-content: space-around;
-	  flex-wrap: nowrap; /* assumes you only want one row */
-	}
-	</style>
 </head>
 
 <body>

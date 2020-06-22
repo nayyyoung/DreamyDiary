@@ -29,5 +29,13 @@ public class DiaryService implements IDiaryService{
 		repository.insertMemberInfo(member);
 	}
 	
+	@Override
+	public void updateMemberInfo(MemberVO member) {
+		repository.updateMemberInfo(member);
+	}
 	
+	@Override
+	public void deleteMemberInfo(String id, String password) {
+		repository.deleteMemberInfo(id, password);
+	}
 }

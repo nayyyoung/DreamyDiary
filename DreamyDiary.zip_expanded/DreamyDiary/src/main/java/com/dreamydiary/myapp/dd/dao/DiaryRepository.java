@@ -54,6 +54,7 @@ public class DiaryRepository implements IDiaryRepository{
 		String sql = "INSERT INTO MEMBER (USERID, PASSWORD, "
 				+ "NAME, PHONE, EMAIL, BIRTHDAY, GENDER) "
 				+ "VALUES (?,?,?,?,?,?,?)";
+		System.out.println("test");
 		jdbcTemplate.update(sql,  
 				member.getUserId(), 
 				member.getPassWord(), 
@@ -63,5 +64,27 @@ public class DiaryRepository implements IDiaryRepository{
 				member.getBirthDay(), 
 				member.getGender() 
 		);
+	}
+	
+	@Override
+	public void updateMemberInfo(MemberVO member) {
+		String sql = "UPDATE MEMBER SET"
+				+ "PASSWORD=?, NAME=?, PHONE=?,"
+				+ "EMAIL=?, BIRTHDAY=?, GENDER=? WHERE USERID=?";
+		jdbcTemplate.update(sql,  
+				member.getUserId(), 
+				member.getPassWord(), 
+				member.getName(), 
+				member.getPhoneNumber(), 
+				member.getEmail(), 
+				member.getBirthDay(), 
+				member.getGender() 
+		);
+	}
+	
+	@Override
+	public void deleteMemberInfo(String id, String password) {
+		String sql = "DELETE FROM MEMBER WHERE USERID=? AND PASSWORD=?";
+		jdbcTemplate.update(sql, id, password);
 	}
 }
