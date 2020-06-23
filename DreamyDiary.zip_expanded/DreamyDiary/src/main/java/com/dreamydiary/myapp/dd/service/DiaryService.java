@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dreamydiary.myapp.dd.dao.IDiaryRepository;
+import com.dreamydiary.myapp.dd.model.EventVO;
 import com.dreamydiary.myapp.dd.model.MemberVO;
 
 @Service
@@ -20,8 +21,8 @@ public class DiaryService implements IDiaryService{
 	}
 
 	@Override
-	public List<MemberVO> getMemberList() {
-		return repository.getMemberList();
+	public List<MemberVO> getTotalMember() {
+		return repository.getTotalMember();
 	}
 	
 	@Override
@@ -37,5 +38,15 @@ public class DiaryService implements IDiaryService{
 	@Override
 	public void deleteMemberInfo(String id, String password) {
 		repository.deleteMemberInfo(id, password);
+	}
+	
+	@Override
+	public List<EventVO> getEventList(String id) {	
+		return repository.getEventList(id);
+	}
+	
+	@Override
+	public void insertEventInfo(EventVO event) {
+		repository.insertEventInfo(event);
 	}
 }

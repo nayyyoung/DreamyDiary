@@ -59,7 +59,7 @@
 				        }
 				        calendar.unselect();
 				        document.getElementById("title-txt").value = "";
-				        console.log(calendar.getEventSources());
+				        //console.log(calendar.getEventSources());
 				        //console.log(calendar.getEvents().start);
 				        //console.log(calendar.getEvents().end);
 		        	}
@@ -109,6 +109,57 @@
 // 				]
 			});
 			calendar.render();
+			
+			var saveEvents = document.getElementById("save-event");
+			saveEvents.onclick = function(){
+				//console.log(typeof calendar.getEvents());
+// 				console.log(calendar.getEvents()[0].start);
+				console.log("data transfer click!");
+				console.log(calendar.getEvents().length);
+
+				var eventObj = [];
+				for(var i=0; i<calendar.getEvents().length; ++i){
+					eventObj[i] = {
+							title : calendar.getEvents()[0].title,
+							start : calendar.getEvents()[0].start,
+							end : calendar.getEvents()[0].end
+					}
+					
+ 					//console.log(typeof eventObj[i].start);
+					
+				    $.ajax({
+				        url: "<c:url value='/events'/>",
+				        type: "post",
+				        data: JSON.stringify(eventObj[i]),
+				        dataType: "json",
+				        contentType: "application/json",
+				        success: function(data) {
+				            console.log("data transfer success");
+				        },
+				        error: function(errorThrown) {
+				            console.log(errorThrown.statusText);
+				            //console.log("data transfer fail");
+				        }
+				    });
+				}
+			};
+			
+			var getEvents = document.getElementById("get-event");
+			getEvents.onclick = function(){
+				 $.ajax({
+				        url: "<c:url value='/getevents'/>",
+				        dataType: "json",
+				        type: "post",
+				        success: function(data) {
+				        	for(var i=0; i<data.length; ++i){
+				        		calendar.addEvent(data[i]);
+				        	}
+				        },
+				        error:function() {
+				            console.log("error");
+				        }
+				    });
+			}
 		});
 	</script>
 </head>
@@ -126,13 +177,18 @@
 				<li class="nav-item">Title <input type="text" id="title-txt"></li>
 				<li class="nav-item">Color <input type="color" id="color-select" value="#FFFFFF"></li>
 				<li class="nav-item">Image <input type="text" id="image-url"></li>
-				
 				<li class="nav-item">Select Menu
 					<select id="select-menu">
 						<option value="Title">Title</option>
 						<option value="Color">Color</option>
 						<option value="Image">Image</option>
 					</select>
+				</li>	
+				<li class="nav-item">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="button" id="save-event">Save</button>
+				</li>
+				<li class="nav-item">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="button" id="get-event">Load</button>
 				</li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
